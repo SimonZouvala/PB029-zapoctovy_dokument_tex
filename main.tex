@@ -1,19 +1,68 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
+\usepackage[top=22mm,bottom=24mm,left=34mm,right=25mm,headsep=6mm,footskip=8mm,headheight=12pt]{geometry}
 \usepackage[texindy, nonewpage]{imakeidx}
-\makeindex[columns=1, title=Rejstřík seřazený podle abecedy, options= -I latex  --language czech  --codepage utf8]
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage[protrusion,expansion]{microtype} % Balík umožňující expanzi fontů a zavěšování interpunkce z HZ-programu.
+% \usepackage[pass,showframe]{geometry}
 
- 
+\makeindex[columns=1, title=Rejstřík seřazený podle abecedy, options= -I latex  --language czech  --codepage utf8]
+\usepackage{graphicx} % pro práci s grafikou
+\usepackage{mflogo} % pro práci s MetaPostem
+
 
 
 \usepackage[english,main=czech]{babel}
 
-\title{PB029-Zápočtový dokument}
-\author{445475 }
-\date{November 2020}
-  
+% \newcommand{\Jmeno}[12pt]{\textbf{}}
+\parindent=0cm
+\usepackage[framemethod=TikZ]{mdframed}
+%polozkarem
+\newcounter{polozka}[section]
+\renewcommand{\thepolozka}{}
+\newenvironment{polozka}[2][]{%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=black!20]
+{\strut \thepolozka};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=black!20]
+{\strut \thepolozka~#1};}}%
+}%
+\mdfsetup{innertopmargin=5pt,linecolor=black!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\end{mdframed}}
+
+
+\newcommand{\roundpic}[4][]{
+  \tikz\node [circle,draw,line width=2pt,color=black!20, minimum width = #2,path picture = {
+      \node [#1] at (path picture bounding box.center) {
+        \includegraphics[width=#3]{#4}};
+    }] {};}
+
+
+\title{PB029: 1. zápočtový dokument}
+\newcommand\Jmeno{\Large{\textbf{Bc. et Bc. Šimon Zouvala}\\}}
+\newcommand\Narozeni{*\normalsize{6.9.1995}\\}
+\newcommand\Email{445475@mail.muni.cz}
+\newcommand\Skola[2]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}}\\}
+\newcommand\Obor[1]{\parindent=0.5cm\small{\textbf{\textit{Obor:}} #1}\vspace{2mm}}
+\newcommand\TitulBc{\parindent=0.5cm Získán titul Bc. \\}
+\newcommand\Dovednost[2]{\raggedright\normalsize{\textbf{#1}}: \small{#2}\\}
+\newcommand\Zajem[3]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}} \\\small{#3}\\}
+\newcommand\ZajemBezDetailu[2]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}}}
+\newcommand\Omne[1]{\centering\textit{#1}}
 \usepackage[
   backend=biber,        % if we want unicode and many other features (biber is already by default)
   style=iso-numeric,
@@ -21,20 +70,96 @@
 \addbibresource{biblio-literatura.bib}
 
 \begin{document}
+% \microtypesetup{protrusion=false, % Tato část ukázky bude sázena se zavěšování interpunkce.
+%                 expansion=false}  %Tento sloupec bude vysázen s expanze fontů
 
-\maketitle
+% \begin{figure}[t]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{obr/anonym.jpg}
+%     \caption{Profilové foto}
+%     \label{fig:my_label}
+% \end{figure}
 
 
 
 
-\section{Introduction}
+\begin{minipage}{0.6\textwidth}\raggedleft
+
+    
+\begin{polozka}[\Jmeno]{Jmeno}
+\centering
+\Narozeni
+\includegraphics[width=0.05\textwidth]{obr/icona_mail.png} \Email
+\end{polozka}
+
+\end{minipage}
+\hfill%
+\begin{minipage}{0.3\textwidth} % adapt widths of minipages to your needs
+\roundpic[xshift=0cm,yshift=0cm]{3cm}{3cm}{foto.jpg}
+% \includegraphics[width=0.5\linewidth]{foto.jpg}
+\end{minipage}%
+
+
+
+
+\begin{center}
+\microtypesetup{protrusion=true,expansion=true}
+
+\begin{multicols}{2}
+\begin{polozka}[O mně]{Omne}
+\Omne{Jsem student, který má široký záběr zájmů a beru všechno co dělám zodpovědně.}
+\end{polozka}
+
+
+\begin{polozka}[Vzdělání]{Vzdelani}\index{Životopis!Vzdělání}
+\Skola{Univerzita Tomáše Bati, Fakulta aplikované informatiky, Zlín}{2020-nyní}
+\Obor{Softwarové inženýrství}
+
+\Skola{Masarykova univerzita, Přírodovědecká fakulta, Brno}{2018-nyní}
+\Obor{Chemoinformatika a bioinformatika}
+
+\Skola{Masarykova univerzita, Lékařská fakulta, Brno}{2017-2020}
+\TitulBc
+\Obor{Optika a Optometrie}
+\Skola{Masarykova univerzita, Přírodovědecká fakulta, Brno}{2015-2018}
+\TitulBc
+\Obor{Chemoinformatika a bioinformatika}
+
+\Skola{Gymnázium Josefa Ressela, Chrudim}{2011-2015}
+\vspace{2mm}
+\Skola{ZŠ Josefa Ressla, Pardubice}{2002-2011}
+\end{polozka}
+
+ 
+\columnbreak
+
+\begin{polozka}[Dovednosti a znalosti]{Dovednosti}\index{Životopis!Dovednosti a znalosti}
+\Dovednost{Práce na PC}{MS Office (Word, Excel, Power Point, Acces), LaTeX, fotky a grafika (Gimp, Adobe Lightroom, Zoner, Inkscape)}
+\Dovednost{Operační systémy}{Windows, Linux (Ubuntu)}
+\Dovednost{Programovací jazyky}{(X)HTML, CSS, XML, Pascal/Delphi, Python, Java}
+\Dovednost{Jazyky}{Angličtina (středně pokročilá), Ruština (základní)}
+\Dovednost{Řidičský průkaz sk.}{B}
+\end{polozka}
+\begin{polozka}[Zájmy]{Zajmy}\index{Životopis!Zájmy}
+\Zajem{Chlapecký sbor BONIFANTES}{2002-2015}{Koncertní turné (USA, Kanada, VB, Slovinsko, Slovensko, Itálie, Francie)}
+\Zajem{Bucks Pardubice – tým amerického fotbalu}{2012-2015}{správce webu, tvorba propagačních materiálů}
+\Zajem{Sportovní klub Sígrs, z.s., – tým amerického fotbalu}{2015-nyní}{tvorba webu www.sigrs.cz, tvorba propagačních materiálů, práce s organizací klubu, manager mládežnického programu od roku 2016, trenérská licence C od roku 2019}
+\ZajemBezDetailu{Rozhodčí ČAAF}{2016-nyní}
+\end{polozka}
+
+\end{multicols}
+\end{center}
 
 První BP \citetitle{Zouvala2018thesis} \index{Bakalářská práce!\citetitle{Zouvala2018thesis}} \cite{Zouvala2018thesis} v roce \citeyear{Zouvala2018thesis} a druhá BP \citetitle{Zouvala2020thesis} \index{Bakalářská práce!\citetitle{Zouvala2020thesis}} \cite{Zouvala2020thesis} v roce \citeyear{Zouvala2020thesis}.
-A zde je něco k mé DP \index{Diplomová práce} \cite{li2009haad}.
+A zde je něco k mé DP \index{Diplomová práce} \cite{li2009haad}. \includegraphics[width=0.05\textwidth]{obr/mpobrazek-001.mps}
 
 Zkouška zatřídění: car\index{car}, cár\index{cár}, carevna\index{carevna},
                        zlato\index{zlato}, zlý\index{zlý}, žluna\index{žluna},
                        žlutý\index{žlutý}.
+
+
+\includegraphics[width=0.5\textwidth]{obr/mpobrazek-001.mps}
+
 
 \printindex
 
