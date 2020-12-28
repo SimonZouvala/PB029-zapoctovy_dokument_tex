@@ -2,168 +2,84 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
-\usepackage[top=22mm,bottom=24mm,left=34mm,right=25mm,headsep=6mm,footskip=8mm,headheight=12pt]{geometry}
-\usepackage[texindy, nonewpage]{imakeidx}
-\usepackage{multicol}
+\usepackage[top=22mm,bottom=24mm,left=34mm,right=25mm,headsep=6mm,footskip=8mm,headheight=12pt]{geometry} % Vzhled stránky, podobné jako u thesis
+\usepackage[texindy, nonewpage]{imakeidx} %Balíček pro restřík
+\usepackage{multicol} % pro vytvoření sloupců
 \usepackage{tikz}
 \usepackage[protrusion,expansion]{microtype} % Balík umožňující expanzi fontů a zavěšování interpunkce z HZ-programu.
 % \usepackage[pass,showframe]{geometry}
+\usepackage{hyperref} %balíček pro podporu hyperlinků
 
-\makeindex[columns=1, title=Rejstřík seřazený podle abecedy, options= -I latex  --language czech  --codepage utf8]
+\makeindex[columns=2, title=Rejstřík seřazený podle abecedy] %Vypsání rejstříku
 \usepackage{graphicx} % pro práci s grafikou
 \usepackage{mflogo} % pro práci s MetaPostem
-
-
-
-\usepackage[english,main=czech]{babel}
-
-% \newcommand{\Jmeno}[12pt]{\textbf{}}
-\parindent=0cm
-\usepackage[framemethod=TikZ]{mdframed}
-%polozkarem
-\newcounter{polozka}[section]
-\renewcommand{\thepolozka}{}
-\newenvironment{polozka}[2][]{%
-\ifstrempty{#1}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=black!20]
-{\strut \thepolozka};}}
-}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=black!20]
-{\strut \thepolozka~#1};}}%
-}%
-\mdfsetup{innertopmargin=5pt,linecolor=black!20,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax
-}
-\begin{mdframed}[]\relax%
-\label{#2}}{\end{mdframed}}
-
-
-\newcommand{\roundpic}[4][]{
-  \tikz\node [circle,draw,line width=2pt,color=black!20, minimum width = #2,path picture = {
-      \node [#1] at (path picture bounding box.center) {
-        \includegraphics[width=#3]{#4}};
-    }] {};}
-
-
-\title{PB029: 1. zápočtový dokument}
-\newcommand\Jmeno{\Large{\textbf{Bc. et Bc. Šimon Zouvala}\\}}
-\newcommand\Narozeni{*\normalsize{6.9.1995}\\}
-\newcommand\Email{445475@mail.muni.cz}
-\newcommand\Skola[2]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}}\\}
-\newcommand\Obor[1]{\parindent=0.5cm\small{\textbf{\textit{Obor:}} #1}\vspace{2mm}}
-\newcommand\TitulBc{\parindent=0.5cm Získán titul Bc. \\}
-\newcommand\Dovednost[2]{\raggedright\normalsize{\textbf{#1}}: \small{#2}\\}
-\newcommand\Zajem[3]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}} \\\small{#3}\\}
-\newcommand\ZajemBezDetailu[2]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}}}
-\newcommand\Omne[1]{\centering\textit{#1}}
 \usepackage[
   backend=biber,        % if we want unicode and many other features (biber is already by default)
   style=iso-numeric,
   shortnumeration=true]{biblatex}
 \addbibresource{biblio-literatura.bib}
+\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}} %místo #. vypíše v citacích [#]
+
+\usepackage[framemethod=TikZ]{mdframed}
+ \usepackage[english,main=czech]{babel}
+\title{PB029: 1. zápočtový dokument}
+
+
+\microtypesetup{protrusion=true, % Tato část ukázky bude sázena se zavěšování interpunkce.
+                expansion=true}  %Tento sloupec bude vysázen s expanze fontů
 
 \begin{document}
-% \microtypesetup{protrusion=false, % Tato část ukázky bude sázena se zavěšování interpunkce.
-%                 expansion=false}  %Tento sloupec bude vysázen s expanze fontů
+\include{zivotopis}
 
-% \begin{figure}[t]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{obr/anonym.jpg}
-%     \caption{Profilové foto}
-%     \label{fig:my_label}
-% \end{figure}
+\section*{Úvod k \citetitle{Zouvala2020thesis} z roku \citeyear{Zouvala2020thesis}\cite{Zouvala2020thesis}}\index{Bakalářská práce!\citetitle{Zouvala2020thesis}} 
+\microtypesetup{protrusion=false, % Tato část ukázky bude sázena bez zavěšování interpunkce.
+                expansion=false}  %Tento sloupec bude vysázen bez expanze fontů
+V provozu oční optiky se lze setkat s mnoha přístupy jak zpracovávat a uchovávat data o~klientech, zakázkách, skladovém hospodářství a souvisejících činnostech. Ať už se jedná o papírovou nebo elektronickou podobu, tak princip a účel je stejný. Rozdíl je jen v tom, jaký způsob daná oční optika preferuje, a na který má finanční nebo prostorovou kapacitu. Při dostatečném prostoru se lze rozhodnout pro možnost skladování papírové dokumentace, v opačném případe pro pořízení výpočetní techniky. Bakalářská práce se zaměřuje na druhou zmíněnou variantu, tedy na elektronické zpracování a uchovávání dat.
 
+První část představuje základní přehled o možných typech softwarů pro elektronické vedení zakázek, jež je možné využívat v oční optice, s cílem ulehčit a urychlit zpracování informací, které potřebujeme zaznamenat. Nabízí obecné vlastnosti těchto nástrojů a způsob práce s nimi. Dále podrobněji popisuje jednotlivé softwary, které jsou rozděleny na skupiny desktopových a webových aplikací. Následně dává jejich srovnání v~rámci těchto skupin.
 
+Druhá část práce popisuje možné použití softwarů v oční optice k centrování brýlových čoček, které lze použít k objednání a výrobě individuálních brýlových čoček. Nabízí využití softwarů např. při objednávání korekčních pomůcek přes objednávkové systémy, jež vytvářejí sami výrobci čoček k tomu, aby poskytovali jednodušší a rychlejší vyřízení objednávek svým odběratelům. Dále je popsáno uplatnění softwarů v oční optice pro~získávání dat z přístrojů tak, aby bylo možné mít všechny informace ze všech zařízení na~jednom místě bez použití dalších medií, jako je papír či externí disk.
 
+Práce má sloužit jako přehled příkladů nejčastěji využívaných softwarů v oční optice. Jelikož se trh s aktuálními softwary velmi rychle vyvíjí, je tedy možné na českém trhu nalézt další programy či softwary, které nejsou zmíněny v této bakalářské práci.
 
-\begin{minipage}{0.6\textwidth}\raggedleft
+\section*{Úvod k \citetitle{Zouvala2018thesis} z roku \citeyear{Zouvala2018thesis} \cite{Zouvala2018thesis}}\index{Bakalářská práce!\citetitle{Zouvala2018thesis}}
+\microtypesetup{protrusion=true, % Tato část ukázky bude sázena se zavěšování interpunkce.
+                expansion=true}  %Tento sloupec bude vysázen s expanze fontů
 
-    
-\begin{polozka}[\Jmeno]{Jmeno}
-\centering
-\Narozeni
-\includegraphics[width=0.05\textwidth]{obr/icona_mail.png} \Email
-\end{polozka}
+Parciální atomové náboje jsou reálná čísla popisující rozložení elektronové hustoty v~molekule \cite{atkins2006atkins}. Protože se jedná o~teoretický koncept, nejsou náboje experimentálně měřitelné a jejich hodnoty tak lze získat pouze výpočtem. Metody založené na kvantové mechanice poskytují obecně nejlepší výsledky, avšak jejich výpočetní náročnost limituje jejich použití pouze na malé systémy. Výrazně rychlejší jsou empirické metody, které používají větší aproximaci. Empirické metody používají pro výpočet experimentálně naměřená nebo parametrizovaná data.
 
-\end{minipage}
-\hfill%
-\begin{minipage}{0.3\textwidth} % adapt widths of minipages to your needs
-\roundpic[xshift=0cm,yshift=0cm]{3cm}{3cm}{foto.jpg}
-% \includegraphics[width=0.5\linewidth]{foto.jpg}
-\end{minipage}%
+Příkladem empirických metod je Molecular graph charge (MGC) \cite{oliferenko2001novel} model nebo Orbital graph charge (OGC) model \cite{oliferenko2001novel}. Obě metody počítají parciální atomové náboje pomocí informací ohledně topologie molekuly. 
 
+Parciální atomové náboje nalézají mnoho aplikací v~oblasti organické a fyzikální chemie, ale i ve~výpočetní chemii a chemoinformatice. Jednou z~častých aplikací nábojů v~chemoinformatice je jejich využití pro predikci fyzikálně-chemických vlastností, typické je například použití pro predikci disociační konstanty $pK_{a}$ \cite{vavrekova2013predicting, geidl2015does, geidl2015high}.
 
+Cílem této bakalářské práce je implementovat empirické metody MGC a OGC pro výpočet parciálních atomových nábojů a otestovat aplikovatelnost těchto metod pro predikci $pK_{a}$.
 
-
-\begin{center}
-\microtypesetup{protrusion=true,expansion=true}
-
-\begin{multicols}{2}
-\begin{polozka}[O mně]{Omne}
-\Omne{Jsem student, který má široký záběr zájmů a beru všechno co dělám zodpovědně.}
-\end{polozka}
-
-
-\begin{polozka}[Vzdělání]{Vzdelani}\index{Životopis!Vzdělání}
-\Skola{Univerzita Tomáše Bati, Fakulta aplikované informatiky, Zlín}{2020-nyní}
-\Obor{Softwarové inženýrství}
-
-\Skola{Masarykova univerzita, Přírodovědecká fakulta, Brno}{2018-nyní}
-\Obor{Chemoinformatika a bioinformatika}
-
-\Skola{Masarykova univerzita, Lékařská fakulta, Brno}{2017-2020}
-\TitulBc
-\Obor{Optika a Optometrie}
-\Skola{Masarykova univerzita, Přírodovědecká fakulta, Brno}{2015-2018}
-\TitulBc
-\Obor{Chemoinformatika a bioinformatika}
-
-\Skola{Gymnázium Josefa Ressela, Chrudim}{2011-2015}
-\vspace{2mm}
-\Skola{ZŠ Josefa Ressla, Pardubice}{2002-2011}
-\end{polozka}
-
- 
-\columnbreak
-
-\begin{polozka}[Dovednosti a znalosti]{Dovednosti}\index{Životopis!Dovednosti a znalosti}
-\Dovednost{Práce na PC}{MS Office (Word, Excel, Power Point, Acces), LaTeX, fotky a grafika (Gimp, Adobe Lightroom, Zoner, Inkscape)}
-\Dovednost{Operační systémy}{Windows, Linux (Ubuntu)}
-\Dovednost{Programovací jazyky}{(X)HTML, CSS, XML, Pascal/Delphi, Python, Java}
-\Dovednost{Jazyky}{Angličtina (středně pokročilá), Ruština (základní)}
-\Dovednost{Řidičský průkaz sk.}{B}
-\end{polozka}
-\begin{polozka}[Zájmy]{Zajmy}\index{Životopis!Zájmy}
-\Zajem{Chlapecký sbor BONIFANTES}{2002-2015}{Koncertní turné (USA, Kanada, VB, Slovinsko, Slovensko, Itálie, Francie)}
-\Zajem{Bucks Pardubice – tým amerického fotbalu}{2012-2015}{správce webu, tvorba propagačních materiálů}
-\Zajem{Sportovní klub Sígrs, z.s., – tým amerického fotbalu}{2015-nyní}{tvorba webu www.sigrs.cz, tvorba propagačních materiálů, práce s organizací klubu, manager mládežnického programu od roku 2016, trenérská licence C od roku 2019}
-\ZajemBezDetailu{Rozhodčí ČAAF}{2016-nyní}
-\end{polozka}
-
-\end{multicols}
-\end{center}
-
-První BP \citetitle{Zouvala2018thesis} \index{Bakalářská práce!\citetitle{Zouvala2018thesis}} \cite{Zouvala2018thesis} v roce \citeyear{Zouvala2018thesis} a druhá BP \citetitle{Zouvala2020thesis} \index{Bakalářská práce!\citetitle{Zouvala2020thesis}} \cite{Zouvala2020thesis} v roce \citeyear{Zouvala2020thesis}.
-A zde je něco k mé DP \index{Diplomová práce} \cite{li2009haad}. \includegraphics[width=0.05\textwidth]{obr/mpobrazek-001.mps}
+Jednotlivé úkoly této práce jsou:
+\begin{itemize}
+\item Nastudovat metody MGC a OGC z~primárních zdrojů.
+\item Implementovat obě metody v~libovolném vyšším programovacím jazyce nezávislém na operačním systému.
+\item Porovnat výsledky metod na vybrané reprezentativní sadě molekul.
+\item Zjistit, zdali lze metody použít pro predikci $pK_{a}$ v rámci předem připraveného workflow.
+\end{itemize}
 
 Zkouška zatřídění: car\index{car}, cár\index{cár}, carevna\index{carevna},
-                       zlato\index{zlato}, zlý\index{zlý}, žluna\index{žluna},
-                       žlutý\index{žlutý}.
+                      zlato\index{zlato}, zlý\index{zlý}, žluna\index{žluna},
+                      žlutý\index{žlutý}.
+                      
+Obrázek č.\ref{obr.MetaPost}  ukazuje obrázek vytvořený pomocí MetaPostu. 
+
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.4\textwidth]{obr/mpobrazek-001.mps}
+    \caption{Ukázka použití MetaPostu}\index{Obrázek!MetaPost}
+    \label{obr.MetaPost}
 
 
-\includegraphics[width=0.5\textwidth]{obr/mpobrazek-001.mps}
-
+\end{figure}
 
 \printindex
 
-\printbibliography[title = {Seznam bibliografických citací}] 
+\printbibliography[title = {Seznam bibliografických citací}]\index{Seznam Bibliografických citací} 
 
 
 

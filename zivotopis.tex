@@ -1,0 +1,115 @@
+
+\parindent=0cm
+
+%Vytvoří vzhled jednotlivých položek v životopisu
+\newcounter{polozka}[section]
+\renewcommand{\thepolozka}{}
+\newenvironment{polozka}[2][]{%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=black!20]
+{\strut \thepolozka};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=black!20]
+{\strut \thepolozka~#1};}}%
+}%
+\mdfsetup{innertopmargin=5pt,linecolor=black!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\end{mdframed}}
+
+
+\newcommand{\roundpic}[4][]{
+  \tikz\node [circle,draw,line width=2pt,color=black!20, minimum width = #2,path picture = {
+      \node [#1] at (path picture bounding box.center) {
+        \includegraphics[width=#3]{#4}};
+    }] {};}
+
+
+
+\newcommand\Jmeno{\Large{\textbf{Bc. et Bc. Šimon Zouvala}\\}}
+\newcommand\Narozeni{*\normalsize{6.9.1995}\\}
+\newcommand\Email{445475@mail.muni.cz}
+\newcommand\Skola[2]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}}\\}
+\newcommand\Obor[1]{\parindent=0.5cm\small{\textbf{\textit{Obor:}} #1}\vspace{2mm}}
+\newcommand\TitulBc{\parindent=0.5cm Získán titul Bc. \\}
+\newcommand\Dovednost[2]{\raggedright\normalsize{\textbf{#1}}: \small{#2}\\}
+\newcommand\Zajem[3]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}} \\\small{#3}\\}
+\newcommand\ZajemBezDetailu[2]{\raggedright\normalsize{\textbf{#1} \textit{(#2)}}}
+\newcommand\Omne[1]{\centering\textit{#1}}
+
+
+
+
+\begin{minipage}{0.6\textwidth}\raggedleft
+
+    
+\begin{polozka}[\Jmeno]{Jmeno}
+\centering
+\Narozeni
+\includegraphics[width=0.05\textwidth]{obr/icona_mail.png}\index{Obrázek!Ikona e-mailu} \Email
+\end{polozka}
+
+\end{minipage}
+\hfill%
+\begin{minipage}{0.3\textwidth} % adapt widths of minipages to your needs
+\roundpic[xshift=0cm,yshift=0cm]{3cm}{3cm}{foto.jpg}\index{Obrázek!Fotka}
+\end{minipage}%
+
+
+
+
+\begin{center}
+\microtypesetup{protrusion=true,expansion=true}
+
+\begin{multicols}{2}
+\begin{polozka}[O mně]{Omne}\index{Životopis!O mně}
+\Omne{Jsem student, který má široký záběr zájmů a beru všechno co dělám zodpovědně.}
+\end{polozka}
+
+
+\begin{polozka}[Vzdělání]{Vzdelani}\index{Životopis!Vzdělání}
+\Skola{Univerzita Tomáše Bati, Fakulta aplikované informatiky, Zlín}{2020-nyní}
+\Obor{Softwarové inženýrství}
+
+\Skola{Masarykova univerzita, Přírodovědecká fakulta, Brno}{2018-nyní}
+\Obor{Chemoinformatika a bioinformatika}
+
+\Skola{Masarykova univerzita, Lékařská fakulta, Brno}{2017-2020}
+\TitulBc
+\Obor{Optika a Optometrie}
+\Skola{Masarykova univerzita, Přírodovědecká fakulta, Brno}{2015-2018}
+\TitulBc
+\Obor{Chemoinformatika a bioinformatika}
+
+\Skola{Gymnázium Josefa Ressela, Chrudim}{2011-2015}
+\vspace{2mm}
+\Skola{ZŠ Josefa Ressla, Pardubice}{2002-2011}
+\end{polozka}
+
+ 
+\columnbreak
+
+\begin{polozka}[Dovednosti a znalosti]{Dovednosti}\index{Životopis!Dovednosti a znalosti}
+\Dovednost{Práce na PC}{MS Office (Word, Excel, Power Point, Acces), LaTeX, fotky a grafika (Gimp, Adobe Lightroom, Zoner, Inkscape)}
+\Dovednost{Operační systémy}{Windows, Linux (Ubuntu)}
+\Dovednost{Programovací jazyky}{(X)HTML, CSS, XML, Pascal/Delphi, Python, Java}
+\Dovednost{Jazyky}{Angličtina (středně pokročilá), Ruština (základní)}
+\Dovednost{Řidičský průkaz sk.}{B}
+\end{polozka}
+\begin{polozka}[Zájmy]{Zajmy}\index{Životopis!Zájmy}
+\Zajem{Chlapecký sbor BONIFANTES}{2002-2015}{Koncertní turné (USA, Kanada, VB, Slovinsko, Slovensko, Itálie, Francie)}
+\Zajem{Bucks Pardubice – tým amerického fotbalu}{2012-2015}{správce webu, tvorba propagačních materiálů}
+\Zajem{Sportovní klub Sígrs, z.s., – tým amerického fotbalu}{2015-nyní}{tvorba webu www.sigrs.cz, tvorba propagačních materiálů, práce s organizací klubu, manager mládežnického programu od roku 2016, trenérská licence C od roku 2019}
+\ZajemBezDetailu{Rozhodčí ČAAF}{2016-nyní}
+\end{polozka}
+
+\end{multicols}
+\end{center}
